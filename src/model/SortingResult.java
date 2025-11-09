@@ -1,6 +1,5 @@
 package model;
 
-// classe para armazenar os resultados de cada teste de ordenação
 public class SortingResult {
 
     private String algorithmName;
@@ -8,7 +7,6 @@ public class SortingResult {
     private int dataSize;
     private long executionTimeNanos;
 
-    // construtor
     public SortingResult(String algorithmName, String dataType, int dataSize, long executionTimeNanos) {
         this.algorithmName = algorithmName;
         this.dataType = dataType;
