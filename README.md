@@ -9,28 +9,28 @@ As medições de tempo são realizadas com base em três tipos de conjuntos de d
 ## 📁 Estrutura do Projeto
 
 ```text
-BubbleSort/
-├── data/                  # Arquivos CSV com dados de teste
+sorting-algorithms/
+├── data/                           # Arquivos CSV com dados de teste
 ├── src/
-│   ├── algorithms/        # Implementações dos algoritmos de ordenação
+│   ├── algorithms/                 # Implementações dos algoritmos de ordenação
 │   │   ├── BubbleSort.java
 │   │   ├── InsertionSort.java
 │   │   ├── QuickSort.java
 │   │   └── SortingAlgorithm.java
-│   ├── model/             # Classe de modelo para encapsular os resultados
+│   ├── model/                      # Classe de modelo para encapsular os resultados
 │   │   └── SortingResult.java
-│   ├── util/              # Utilitários para leitura, medição e geração de relatórios
+│   ├── util/                       # Utilitários para leitura, medição e geração de relatórios
 │   │   ├── CSVReader.java
 │   │   ├── PerformanceMeasurer.java
 │   │   ├── ReportExporter.java
 │   │   └── ReportGenerator.java
-│   └── Main.java          # Classe principal de execução
-├── test/                  # Implementação dos testes unitários
+│   └── Main.java                   # Classe principal de execução
+├── test/                           # Implementação dos testes unitários
 │   ├── TestCSVReader.java
 │   ├── TestPerformanceMeasurer.java
 │   ├── TestReportGenerator.java
 │   └── TestSortingResult.java
-└── README.md              # Este arquivo
+└── README.md                       # Este arquivo
 ```
 
 ---
