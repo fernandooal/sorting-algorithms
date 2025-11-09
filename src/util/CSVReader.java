@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// Classe utilitária para leitura de arquivos CSV
+// classe utilitária para leitura de arquivos CSV
 public class CSVReader {
 
     public static int[] readCSV(String filePath) {
@@ -16,17 +16,17 @@ public class CSVReader {
             String line;
 
             while ((line = fileReader.readLine()) != null) {
-                // Remove espaços em branco
+                // remover espaços em branco
                 line = line.trim();
 
-                // Ignora linhas vazias
+                // ignorar linhas vazias
                 if (!line.isEmpty()) {
                     try {
-                        // Converte a linha para número inteiro
+                        // converter a linha para número inteiro
                         int number = Integer.parseInt(line);
                         numbers.add(number);
                     } catch (NumberFormatException e) {
-                        // Ignora linhas que não são números válidos
+                        // ignorar linhas que não são números válidos
                         System.err.println("Aviso: linha ignorada (não é um número válido): " + line);
                     }
                 }
@@ -41,7 +41,7 @@ public class CSVReader {
             return new int[0];
         }
 
-        // Converte List<Integer> para int[]
+        // converter List<Integer> para int[]
         return numbers.stream().mapToInt(Integer::intValue).toArray();
     }
 
@@ -65,7 +65,7 @@ public class CSVReader {
         System.out.println("  Primeiro elemento: " + data[0]);
         System.out.println("  Último elemento: " + data[data.length - 1]);
 
-        // Mostra alguns elementos do meio se o array for grande
+        // mostrar alguns elementos do meio se o array for grande
         if (data.length > 10) {
             System.out.print("  Primeiros 5: ");
             for (int i = 0; i < 5; i++) {

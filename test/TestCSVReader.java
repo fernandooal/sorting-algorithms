@@ -8,10 +8,10 @@ public class TestCSVReader {
         System.out.println("=".repeat(80));
         System.out.println();
 
-        // Define o caminho base dos arquivos
+        // define o caminho base dos arquivos
         String dataPath = "data/";
 
-        // Define os arquivos que serão testados
+        // define os arquivos que serão testados
         String[] testFiles = {
                 "aleatorio_100.csv",
                 "aleatorio_1000.csv",
@@ -27,7 +27,7 @@ public class TestCSVReader {
         int successCount = 0;
         int failCount = 0;
 
-        // Testa cada arquivo
+        // testar cada arquivo
         for (String fileName : testFiles) {
             String filePath = dataPath + fileName;
 
@@ -35,7 +35,7 @@ public class TestCSVReader {
             System.out.println("Testando arquivo: " + fileName);
             System.out.println("-".repeat(80));
 
-            // Verifica se o arquivo existe
+            // verificar se o arquivo existe
             if (!CSVReader.fileExists(filePath)) {
                 System.err.println("ERRO: Arquivo não encontrado: " + filePath);
                 System.err.println("Certifique-se de que a pasta 'data' existe e contém os arquivos CSV");
@@ -43,26 +43,26 @@ public class TestCSVReader {
                 continue;
             }
 
-            // Tenta ler o arquivo
+            // ler o arquivo
             int[] data = CSVReader.readCSV(filePath);
 
-            // Verifica se a leitura foi bem-sucedida
+            // verificar se a leitura foi bem-sucedida
             if (data.length == 0) {
                 System.err.println("ERRO: Arquivo vazio ou não foi possível ler: " + filePath);
                 failCount++;
                 continue;
             }
 
-            // Exibe informações sobre o array lido
+            // exibir informações sobre o array lido
             CSVReader.printArrayInfo(data, "Dados carregados");
 
-            // Verifica a consistência dos dados
+            // verificar a consistência dos dados
             verificarConsistencia(data, fileName);
 
             successCount++;
         }
 
-        // Exibe resumo final
+        // exibir resumo final
         System.out.println("\n" + "=".repeat(80));
         System.out.println("RESUMO DOS TESTES");
         System.out.println("=".repeat(80));
@@ -82,7 +82,7 @@ public class TestCSVReader {
     private static void verificarConsistencia(int[] data, String fileName) {
         System.out.println("\nVerificação de consistência:");
 
-        // Extrai informações do nome do arquivo
+        // extrair informações do nome do arquivo
         String tipo = "";
         int tamanhoEsperado = 0;
 
@@ -102,7 +102,7 @@ public class TestCSVReader {
             tamanhoEsperado = 10000;
         }
 
-        // Verifica o tamanho
+        // verificar o tamanho
         if (data.length == tamanhoEsperado) {
             System.out.println("  Tamanho: OK (" + data.length + " elementos)");
         } else {
@@ -110,7 +110,7 @@ public class TestCSVReader {
                     ", encontrado " + data.length);
         }
 
-        // Verifica a ordem (apenas para crescente e decrescente)
+        // verificar a ordem (apenas para crescente e decrescente)
         if (tipo.equals("crescente")) {
             boolean ordenado = verificarOrdemCrescente(data);
             if (ordenado) {
