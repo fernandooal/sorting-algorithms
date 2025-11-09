@@ -1,0 +1,156 @@
+================================================================================
+RELATÓRIO DE ANÁLISE DE ALGORITMOS DE ORDENAÇÃO
+================================================================================
+
+Tipo de Dados: Decrescente
+--------------------------------------------------------------------------------
+Algoritmo            Tamanho         Tempo (ms)          
+--------------------------------------------------------------------------------
+Bubble Sort          100             0.022180            
+Insertion Sort       100             0.003170            
+Quick Sort           100             0.004130            
+Bubble Sort          1000            2.546225            
+Insertion Sort       1000            0.094500            
+Quick Sort           1000            0.366360            
+Bubble Sort          10000           43.963817           
+Insertion Sort       10000           8.686729            
+Quick Sort           10000           33.760854           
+
+Tipo de Dados: Crescente
+--------------------------------------------------------------------------------
+Algoritmo            Tamanho         Tempo (ms)          
+--------------------------------------------------------------------------------
+Bubble Sort          100             0.000500            
+Insertion Sort       100             0.001410            
+Quick Sort           100             0.008700            
+Bubble Sort          1000            0.001160            
+Insertion Sort       1000            0.001590            
+Quick Sort           1000            0.599682            
+Bubble Sort          10000           0.003190            
+Insertion Sort       10000           0.007160            
+Quick Sort           10000           61.567125           
+
+Tipo de Dados: Aleatório
+--------------------------------------------------------------------------------
+Algoritmo            Tamanho         Tempo (ms)          
+--------------------------------------------------------------------------------
+Bubble Sort          100             0.207720            
+Insertion Sort       100             0.065760            
+Quick Sort           100             0.034281            
+Bubble Sort          1000            3.988979            
+Insertion Sort       1000            1.855544            
+Quick Sort           1000            0.075430            
+Bubble Sort          10000           28.169652           
+Insertion Sort       10000           17.940510           
+Quick Sort           10000           0.479981            
+
+
+
+TABELA DE RESULTADOS (em milissegundos)
+====================================================================================================
+Algoritmo            | Tipo de Dados        | Tamanho         | Tempo (ms)          
+====================================================================================================
+Bubble Sort          | Aleatório            | 100             | 0.207720            
+Insertion Sort       | Aleatório            | 100             | 0.065760            
+Quick Sort           | Aleatório            | 100             | 0.034281            
+Bubble Sort          | Aleatório            | 1000            | 3.988979            
+Insertion Sort       | Aleatório            | 1000            | 1.855544            
+Quick Sort           | Aleatório            | 1000            | 0.075430            
+Bubble Sort          | Aleatório            | 10000           | 28.169652           
+Insertion Sort       | Aleatório            | 10000           | 17.940510           
+Quick Sort           | Aleatório            | 10000           | 0.479981            
+Bubble Sort          | Crescente            | 100             | 0.000500            
+Insertion Sort       | Crescente            | 100             | 0.001410            
+Quick Sort           | Crescente            | 100             | 0.008700            
+Bubble Sort          | Crescente            | 1000            | 0.001160            
+Insertion Sort       | Crescente            | 1000            | 0.001590            
+Quick Sort           | Crescente            | 1000            | 0.599682            
+Bubble Sort          | Crescente            | 10000           | 0.003190            
+Insertion Sort       | Crescente            | 10000           | 0.007160            
+Quick Sort           | Crescente            | 10000           | 61.567125           
+Bubble Sort          | Decrescente          | 100             | 0.022180            
+Insertion Sort       | Decrescente          | 100             | 0.003170            
+Quick Sort           | Decrescente          | 100             | 0.004130            
+Bubble Sort          | Decrescente          | 1000            | 2.546225            
+Insertion Sort       | Decrescente          | 1000            | 0.094500            
+Quick Sort           | Decrescente          | 1000            | 0.366360            
+Bubble Sort          | Decrescente          | 10000           | 43.963817           
+Insertion Sort       | Decrescente          | 10000           | 8.686729            
+Quick Sort           | Decrescente          | 10000           | 33.760854           
+====================================================================================================
+
+
+ESTATÍSTICAS GERAIS
+================================================================================
+
+Total de testes executados: 27
+Algoritmos testados: 3
+Tipos de dados testados: 3
+Tempo total de execução: 204.456339 ms
+Tempo médio por teste: 7.572457 ms
+
+Teste mais rápido:
+  Bubble Sort | Crescente | 100 elementos | 0.0005 ms
+
+Teste mais lento:
+  Quick Sort | Crescente | 10000 elementos | 61.5671 ms
+
+
+
+RANKING DE DESEMPENHO MÉDIO
+================================================================================
+
+1. Insertion Sort - 3.184041 ms (média)
+2. Bubble Sort - 8.767047 ms (média)
+3. Quick Sort - 10.766283 ms (média)
+
+
+
+ANÁLISE COMPARATIVA
+================================================================================
+
+Para Aleatório - 10000 elementos:
+  Mais rápido: Quick Sort (0.479981 ms)
+  Mais lento: Bubble Sort (28.169652 ms)
+  Diferença: 58.69x mais rápido
+
+Para Aleatório - 100 elementos:
+  Mais rápido: Quick Sort (0.034281 ms)
+  Mais lento: Bubble Sort (0.207720 ms)
+  Diferença: 6.06x mais rápido
+
+Para Decrescente - 10000 elementos:
+  Mais rápido: Insertion Sort (8.686729 ms)
+  Mais lento: Bubble Sort (43.963817 ms)
+  Diferença: 5.06x mais rápido
+
+Para Crescente - 10000 elementos:
+  Mais rápido: Bubble Sort (0.003190 ms)
+  Mais lento: Quick Sort (61.567125 ms)
+  Diferença: 19300.04x mais rápido
+
+Para Decrescente - 1000 elementos:
+  Mais rápido: Insertion Sort (0.094500 ms)
+  Mais lento: Bubble Sort (2.546225 ms)
+  Diferença: 26.94x mais rápido
+
+Para Decrescente - 100 elementos:
+  Mais rápido: Insertion Sort (0.003170 ms)
+  Mais lento: Bubble Sort (0.022180 ms)
+  Diferença: 7.00x mais rápido
+
+Para Aleatório - 1000 elementos:
+  Mais rápido: Quick Sort (0.075430 ms)
+  Mais lento: Bubble Sort (3.988979 ms)
+  Diferença: 52.88x mais rápido
+
+Para Crescente - 1000 elementos:
+  Mais rápido: Bubble Sort (0.001160 ms)
+  Mais lento: Quick Sort (0.599682 ms)
+  Diferença: 516.97x mais rápido
+
+Para Crescente - 100 elementos:
+  Mais rápido: Bubble Sort (0.000500 ms)
+  Mais lento: Quick Sort (0.008700 ms)
+  Diferença: 17.40x mais rápido
+
