@@ -4,7 +4,7 @@ public class TestCSVReader {
 
     public static void main(String[] args) {
         System.out.println("=".repeat(80));
-        System.out.println("TESTE DE LEITURA DE ARQUIVOS CSV");
+        System.out.println("TESTE UNITÁRIO: CSVReader");
         System.out.println("=".repeat(80));
         System.out.println();
 
@@ -71,9 +71,9 @@ public class TestCSVReader {
         System.out.println("Leituras com falha: " + failCount);
 
         if (failCount == 0) {
-            System.out.println("\nTODOS OS ARQUIVOS FORAM LIDOS COM SUCESSO!");
+            System.out.println("\nTestes concluídos com sucesso.");
         } else {
-            System.err.println("\nALGUNS ARQUIVOS FALHARAM NA LEITURA. Verifique os erros acima.");
+            System.err.println("\nAlguns testes falharam. Verifique os detalhes acima.");
         }
 
         System.out.println("=".repeat(80));
