@@ -10,6 +10,7 @@ public class Main {
 
     // Configuração dos arquivos CSV
     private static final String DATA_PATH = "data/";
+    private static final String REPORT_PATH = "report/";
 
     // Tipos de dados
     private static final String[] DATA_TYPES = {"aleatorio", "crescente", "decrescente"};
@@ -135,11 +136,11 @@ public class Main {
         System.out.println("SALVANDO RESULTADOS EM ARQUIVO");
         System.out.println("=".repeat(80));
 
-        String csvFileName = "resultados.csv";
+        String csvFileName = REPORT_PATH + "resultados.csv";
         util.ReportExporter.saveCSV(csvFileName, csvOutput);
 
         // Salva relatório completo em arquivo texto
-        String reportFileName = "relatorio.txt";
+        String reportFileName = REPORT_PATH + "relatorio.txt";
         String fullReport = ReportGenerator.generateTextReport(allResults) + "\n" +
                 ReportGenerator.generateTable(allResults) + "\n" +
                 ReportGenerator.generateStatistics(allResults) + "\n" +
@@ -184,9 +185,9 @@ public class Main {
         System.out.println("Testes com falha: " + fail + (fail > 0 ? " ✗" : ""));
 
         if (fail == 0) {
-            System.out.println("\nTODOS OS TESTES FORAM EXECUTADOS COM SUCESSO!");
+            System.out.println("\nTestes concluídos com sucesso.");
         } else {
-            System.out.println("\nALGUNS TESTES FALHARAM. Verifique os erros acima.");
+            System.out.println("\nAlguns testes falharam. Verifique os detalhes acima.");
         }
         System.out.println("=".repeat(80));
     }
@@ -196,12 +197,8 @@ public class Main {
         System.out.println(" ".repeat(25) + "EXECUÇÃO CONCLUÍDA COM SUCESSO!");
         System.out.println("=".repeat(80));
         System.out.println("\nArquivos gerados:");
-        System.out.println("  📊 resultados_tde04.csv - Dados para gráficos");
-        System.out.println("  📄 relatorio_tde04.txt - Relatório completo");
-        System.out.println("\nPróximos passos:");
-        System.out.println("  1. Abra resultados_tde04.csv no Excel/Google Sheets");
-        System.out.println("  2. Crie gráficos com os dados");
-        System.out.println("  3. Escreva sua análise baseada no relatório");
+        System.out.println("report/resultados.csv - Dados para gráficos");
+        System.out.println("report/relatorio.txt - Relatório completo");
         System.out.println("=".repeat(80));
         System.out.println();
     }
