@@ -1,31 +1,42 @@
 package algorithms;
 
-// implementação do algoritmo de ordenação Quick Sort
 public class QuickSort implements SortingAlgorithm {
 
-    // método principal para ordenar o array usando Quick Sort
     @Override
     public void sort(int[] data) {
-        // TODO
+        quickSortRecursive(data, 0, data.length - 1);
     }
 
-    // método auxiliar recursivo para o Quick Sort
     private void quickSortRecursive(int[] data, int low, int high) {
-        // TODO
+        if (low >= high){
+            return;
+        }
+
+        // sorting pivot
+        int pivot = data[high];
+        int available = low;
+
+        for (int i = low; i < high; i++) {
+            if (data[i] < pivot) {
+                swap(data, available, i);
+                available++;
+            }
+        }
+        swap(data, available, high);
+
+        // sort left
+        quickSortRecursive(data, low, available - 1);
+
+        // sort right
+        quickSortRecursive(data, available + 1, high);
     }
 
-    // método para particionar o array
-    private int partition(int[] data, int low, int high) {
-        // TODO
-        return 0;
-    }
-
-    // método auxiliar para trocar dois elementos no array
     private void swap(int[] array, int i, int j) {
-        // TODO
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
     }
 
-    // método para retornar o nome do algoritmo
     @Override
     public String getName() {
         return "Quick Sort";
