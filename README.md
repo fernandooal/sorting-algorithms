@@ -25,6 +25,11 @@ BubbleSort/
 │   │   ├── ReportExporter.java
 │   │   └── ReportGenerator.java
 │   └── Main.java          # Classe principal de execução
+├── test/                  # Implementação dos testes unitários
+│   ├── TestCSVReader.java
+│   ├── TestPerformanceMeasurer.java
+│   ├── TestReportGenerator.java
+│   └── TestSortingResult.java
 └── README.md              # Este arquivo
 ```
 
@@ -49,6 +54,8 @@ BubbleSort/
 
 * Responsável pelas seguintes partes do projeto:
 
+  * Implementação da interface de algoritmos de ordenação (**SortingAlgorithm.java**)
+  * Implementação da classe de modelo (**SortingResult.java**)
   * Leitura dos arquivos CSV (**CSVReader.java**)
   * Medidas de desempenho (**PerformanceMeasurer.java**)
   * Impressão e exportação de resultados (**ReportExporter.java**)
