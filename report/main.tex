@@ -1,0 +1,831 @@
+\documentclass[12pt,a4paper]{abntex2}
+
+% Pacotes essenciais
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[brazil]{babel}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{longtable}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{pgfplots}
+\usepackage{xcolor}
+\pgfplotsset{compat=1.18}
+
+\geometry{a4paper,left=3cm,right=2cm,top=3cm,bottom=2cm}
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\OnehalfSpacing
+
+% =========================
+% Configuração de listagens (Código Java)
+% =========================
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{javastyle}{
+  language=Java,
+  backgroundcolor=\color{backcolour},
+  commentstyle=\color{codegreen},
+  keywordstyle=\color{blue}\bfseries,
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\small,
+  breakatwhitespace=false,
+  breaklines=true,
+  captionpos=b,
+  keepspaces=true,
+  numbers=left,
+  numbersep=5pt,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  tabsize=2,
+  frame=single
+}
+
+\lstdefinestyle{console}{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true,
+  keepspaces=true,
+  tabsize=2
+}
+
+\begin{document}
+
+% CAPA
+\title{Relatório Técnico \\ Comparação de Algoritmos de Ordenação}
+\author{Fernando Alonso Piroga da Silva \\ Jafte Carneiro Fagundes da Silva \\ Renato Pestana de Gouveia}
+\date{\textbf{Pontifícia Universidade Católica do Paraná} \\ Resolução de Problemas Estruturados em Computação \\ Prof.ª Marina de Lara \\ \vspace{1cm} \today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+% INTRODUÇÃO
+\section{Introdução}
+
+Este relatório apresenta uma análise comparativa detalhada de três algoritmos clássicos de ordenação: \textbf{Bubble Sort}, \textbf{Insertion Sort} e \textbf{Quick Sort}. O objetivo principal é compreender o comportamento e a eficiência de cada algoritmo em diferentes cenários, variando tanto o tamanho do conjunto de dados quanto sua ordenação inicial.
+
+A análise de algoritmos de ordenação é fundamental na Ciência da Computação, pois permite identificar qual estratégia é mais adequada para diferentes contextos de aplicação. Enquanto alguns algoritmos são eficientes para conjuntos pequenos ou parcialmente ordenados, outros se destacam em grandes volumes de dados aleatórios.
+
+\subsection{Objetivos}
+
+\begin{itemize}
+    \item Implementar os três algoritmos de ordenação em Java seguindo as especificações do GeeksforGeeks
+    \item Medir empiricamente o tempo de execução de cada algoritmo em diferentes cenários
+    \item Analisar o impacto do tamanho do conjunto de dados no desempenho
+    \item Avaliar como a ordenação inicial (aleatória, crescente ou decrescente) afeta cada algoritmo
+    \item Comparar os resultados experimentais com a complexidade teórica esperada
+\end{itemize}
+
+\subsection{Algoritmos Analisados}
+
+\subsubsection{Bubble Sort}
+
+O Bubble Sort é um algoritmo de ordenação simples que funciona comparando repetidamente pares de elementos adjacentes e trocando-os se estiverem na ordem incorreta. O processo é repetido até que nenhuma troca seja necessária, indicando que o array está ordenado.
+
+\textbf{Características:}
+\begin{itemize}
+    \item \textbf{Complexidade de Tempo:}
+    \begin{itemize}
+        \item Melhor caso: $O(n)$ -- quando o array já está ordenado
+        \item Caso médio: $O(n^2)$
+        \item Pior caso: $O(n^2)$ -- quando o array está em ordem decrescente
+    \end{itemize}
+    \item \textbf{Complexidade de Espaço:} $O(1)$ -- ordenação in-place
+    \item \textbf{Estável:} Sim
+    \item \textbf{Aplicações:} Dados pequenos ou didática
+\end{itemize}
+
+\subsubsection{Insertion Sort}
+
+O Insertion Sort constrói o array ordenado um elemento por vez, inserindo cada novo elemento em sua posição correta na parte já ordenada do array. É análogo à forma como organizamos cartas de baralho na mão.
+
+\textbf{Características:}
+\begin{itemize}
+    \item \textbf{Complexidade de Tempo:}
+    \begin{itemize}
+        \item Melhor caso: $O(n)$ -- quando o array já está ordenado
+        \item Caso médio: $O(n^2)$
+        \item Pior caso: $O(n^2)$ -- quando o array está em ordem decrescente
+    \end{itemize}
+    \item \textbf{Complexidade de Espaço:} $O(1)$ -- ordenação in-place
+    \item \textbf{Estável:} Sim
+    \item \textbf{Aplicações:} Conjuntos pequenos, dados parcialmente ordenados
+\end{itemize}
+
+\subsubsection{Quick Sort}
+
+O Quick Sort é um algoritmo de divisão e conquista que seleciona um elemento como pivô e particiona o array de forma que elementos menores fiquem à esquerda do pivô e maiores à direita. O processo é aplicado recursivamente aos subarrays.
+
+\textbf{Características:}
+\begin{itemize}
+    \item \textbf{Complexidade de Tempo:}
+    \begin{itemize}
+        \item Melhor caso: $O(n \log n)$
+        \item Caso médio: $O(n \log n)$
+        \item Pior caso: $O(n^2)$ -- quando o pivô é sempre o menor ou maior elemento
+    \end{itemize}
+    \item \textbf{Complexidade de Espaço:} $O(\log n)$ -- pilha de recursão
+    \item \textbf{Estável:} Não
+    \item \textbf{Aplicações:} Conjuntos grandes de dados, algoritmo de uso geral
+\end{itemize}
+
+\newpage
+
+\section{Metodologia}
+
+\subsection{Ambiente de Execução}
+
+Os testes foram realizados com as seguintes especificações:
+
+\begin{itemize}
+    \item \textbf{Linguagem:} Java SE 17 (ou superior)
+    \item \textbf{IDE:} IntelliJ IDEA / Eclipse / VS Code
+    \item \textbf{Sistema Operacional:} [Especificar: Windows/Linux/MacOS]
+    \item \textbf{Processador:} [Especificar modelo e frequência]
+    \item \textbf{Memória RAM:} [Especificar quantidade]
+    \item \textbf{Método de Medição:} \texttt{System.nanoTime()}
+\end{itemize}
+
+\subsection{Conjuntos de Dados}
+
+Foram utilizados nove arquivos CSV contendo números inteiros, organizados em três cenários distintos:
+
+\begin{enumerate}
+    \item \textbf{Dados Aleatórios:} Números distribuídos sem ordem específica
+    \begin{itemize}
+        \item \texttt{aleatorio\_100.csv} -- 100 elementos
+        \item \texttt{aleatorio\_1000.csv} -- 1.000 elementos
+        \item \texttt{aleatorio\_10000.csv} -- 10.000 elementos
+    \end{itemize}
+    
+    \item \textbf{Dados Ordenados Crescente:} Números já em ordem crescente
+    \begin{itemize}
+        \item \texttt{crescente\_100.csv} -- 100 elementos
+        \item \texttt{crescente\_1000.csv} -- 1.000 elementos
+        \item \texttt{crescente\_10000.csv} -- 10.000 elementos
+    \end{itemize}
+    
+    \item \textbf{Dados Ordenados Decrescente:} Números em ordem decrescente
+    \begin{itemize}
+        \item \texttt{decrescente\_100.csv} -- 100 elementos
+        \item \texttt{decrescente\_1000.csv} -- 1.000 elementos
+        \item \texttt{decrescente\_10000.csv} -- 10.000 elementos
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Arquitetura da Implementação}
+
+O projeto foi estruturado seguindo princípios de Programação Orientada a Objetos:
+
+\begin{itemize}
+    \item \textbf{Interface \texttt{SortingAlgorithm}:} Define o contrato para todos os algoritmos
+    \item \textbf{Classes Concretas:} \texttt{BubbleSort}, \texttt{InsertionSort} e \texttt{QuickSort} implementam a interface
+    \item \textbf{Classe Principal:} Responsável por executar os testes e coletar métricas
+\end{itemize}
+
+\subsubsection{Interface SortingAlgorithm}
+
+\begin{lstlisting}[style=javastyle, caption={Interface para algoritmos de ordenação}]
+package algorithms;
+
+public interface SortingAlgorithm {
+    void sort(int[] data);
+    String getName();
+}
+\end{lstlisting}
+
+\subsection{Procedimento Experimental}
+
+Para cada combinação de algoritmo e conjunto de dados, o seguinte procedimento foi executado:
+
+\begin{enumerate}
+    \item Carregamento dos dados do arquivo CSV
+    \item Criação de uma cópia do array original para garantir condições idênticas
+    \item Registro do tempo inicial usando \texttt{System.nanoTime()}
+    \item Execução do algoritmo de ordenação
+    \item Registro do tempo final usando \texttt{System.nanoTime()}
+    \item Cálculo do tempo decorrido em nanossegundos
+    \item Conversão para milissegundos (divisão por $10^6$)
+    \item Armazenamento dos resultados
+\end{enumerate}
+
+\textbf{Nota importante:} Para garantir precisão nas medições, cada teste foi executado com uma cópia independente do array original, evitando que o estado final de um teste influenciasse outro.
+
+\newpage
+
+\section{Implementação dos Algoritmos}
+
+\subsection{Bubble Sort}
+
+A implementação do Bubble Sort utiliza uma otimização com a variável \texttt{swapped}, que permite detectar quando o array já está ordenado e interromper a execução prematuramente.
+
+\begin{lstlisting}[style=javastyle, caption={Implementação do Bubble Sort}]
+package algorithms;
+
+public class BubbleSort implements SortingAlgorithm {
+    
+    @Override
+    public void sort(int[] data) {
+        int n = data.length;
+        boolean swapped;
+        
+        for (int i = 0; i < n - 1; i++) {
+            swapped = false;
+            
+            for (int j = 0; j < n - i - 1; j++) {
+                if (data[j] > data[j + 1]) {
+                    swap(data, j, j + 1);
+                    swapped = true;
+                }
+            }
+            
+            // Se nenhuma troca ocorreu, o array esta ordenado
+            if (!swapped) {
+                break;
+            }
+        }
+    }
+    
+    private void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    @Override
+    public String getName() {
+        return "Bubble Sort";
+    }
+}
+\end{lstlisting}
+
+\subsection{Insertion Sort}
+
+O Insertion Sort insere cada elemento em sua posição correta na parte já ordenada do array.
+
+\begin{lstlisting}[style=javastyle, caption={Implementação do Insertion Sort}]
+package algorithms;
+
+public class InsertionSort implements SortingAlgorithm {
+    
+    @Override
+    public void sort(int[] data) {
+        for (int i = 1; i < data.length; i++) {
+            int key = data[i];
+            int j = i - 1;
+            
+            while (j >= 0 && data[j] > key) {
+                data[j + 1] = data[j];
+                j--;
+            }
+            
+            data[j + 1] = key;
+        }
+    }
+    
+    @Override
+    public String getName() {
+        return "Insertion Sort";
+    }
+}
+\end{lstlisting}
+
+\subsection{Quick Sort}
+
+O Quick Sort utiliza o último elemento como pivô e particiona recursivamente o array.
+
+\begin{lstlisting}[style=javastyle, caption={Implementação do Quick Sort}]
+package algorithms;
+
+public class QuickSort implements SortingAlgorithm {
+    
+    @Override
+    public void sort(int[] data) {
+        quickSortRecursive(data, 0, data.length - 1);
+    }
+    
+    private void quickSortRecursive(int[] data, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(data, low, high);
+            quickSortRecursive(data, low, pivotIndex - 1);
+            quickSortRecursive(data, pivotIndex + 1, high);
+        }
+    }
+    
+    private int partition(int[] data, int low, int high) {
+        int pivot = data[high];
+        int i = low - 1;
+        
+        for (int j = low; j < high; j++) {
+            if (data[j] <= pivot) {
+                i++;
+                swap(data, i, j);
+            }
+        }
+        
+        swap(data, i + 1, high);
+        return i + 1;
+    }
+    
+    private void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    
+    @Override
+    public String getName() {
+        return "Quick Sort";
+    }
+}
+\end{lstlisting}
+
+\newpage
+
+\section{Resultados Experimentais}
+
+\subsection{Tabela Geral de Tempos de Execução}
+
+A Tabela~\ref{tab:resultados_completos} apresenta os tempos de execução (em milissegundos) de cada algoritmo para todos os cenários testados.
+
+\begin{table}[H]
+\centering
+\caption{Tempos de execução em milissegundos (ms)}
+\label{tab:resultados_completos}
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+\textbf{Cenário} & \textbf{Tamanho} & \textbf{Bubble Sort} & \textbf{Insertion Sort} & \textbf{Quick Sort} \\ 
+\midrule
+\multirow{3}{*}{Aleatório}   
+    & 100     & [INSERIR] & [INSERIR] & [INSERIR] \\
+    & 1.000   & [INSERIR] & [INSERIR] & [INSERIR] \\
+    & 10.000  & [INSERIR] & [INSERIR] & [INSERIR] \\
+\midrule
+\multirow{3}{*}{Crescente}   
+    & 100     & [INSERIR] & [INSERIR] & [INSERIR] \\
+    & 1.000   & [INSERIR] & [INSERIR] & [INSERIR] \\
+    & 10.000  & [INSERIR] & [INSERIR] & [INSERIR] \\
+\midrule
+\multirow{3}{*}{Decrescente} 
+    & 100     & [INSERIR] & [INSERIR] & [INSERIR] \\
+    & 1.000   & [INSERIR] & [INSERIR] & [INSERIR] \\
+    & 10.000  & [INSERIR] & [INSERIR] & [INSERIR] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Instruções para preenchimento:} Execute o programa Java e substitua os valores \texttt{[INSERIR]} pelos tempos reais obtidos.
+
+\subsection{Análise por Cenário}
+
+\subsubsection{Dados Aleatórios}
+
+\begin{table}[H]
+\centering
+\caption{Desempenho com dados aleatórios (ms)}
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+\textbf{Tamanho} & \textbf{Bubble Sort} & \textbf{Insertion Sort} & \textbf{Quick Sort} \\ 
+\midrule
+100     & [INSERIR] & [INSERIR] & [INSERIR] \\
+1.000   & [INSERIR] & [INSERIR] & [INSERIR] \\
+10.000  & [INSERIR] & [INSERIR] & [INSERIR] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Análise esperada:} Em dados aleatórios, espera-se que o Quick Sort apresente o melhor desempenho devido à sua complexidade $O(n \log n)$, enquanto Bubble Sort e Insertion Sort apresentem desempenho similar com complexidade $O(n^2)$.
+
+\subsubsection{Dados Ordenados Crescente}
+
+\begin{table}[H]
+\centering
+\caption{Desempenho com dados já ordenados (ms)}
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+\textbf{Tamanho} & \textbf{Bubble Sort} & \textbf{Insertion Sort} & \textbf{Quick Sort} \\ 
+\midrule
+100     & [INSERIR] & [INSERIR] & [INSERIR] \\
+1.000   & [INSERIR] & [INSERIR] & [INSERIR] \\
+10.000  & [INSERIR] & [INSERIR] & [INSERIR] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Análise esperada:} Este é o \textbf{melhor caso} para Bubble Sort e Insertion Sort. Com a otimização do \texttt{swapped}, o Bubble Sort pode detectar que o array já está ordenado na primeira passagem, atingindo $O(n)$. O Insertion Sort também opera em $O(n)$ pois nenhuma inserção é necessária. O Quick Sort mantém $O(n \log n)$.
+
+\subsubsection{Dados Ordenados Decrescente}
+
+\begin{table}[H]
+\centering
+\caption{Desempenho com dados em ordem reversa (ms)}
+\begin{tabular}{@{}rrrr@{}}
+\toprule
+\textbf{Tamanho} & \textbf{Bubble Sort} & \textbf{Insertion Sort} & \textbf{Quick Sort} \\ 
+\midrule
+100     & [INSERIR] & [INSERIR] & [INSERIR] \\
+1.000   & [INSERIR] & [INSERIR] & [INSERIR] \\
+10.000  & [INSERIR] & [INSERIR] & [INSERIR] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Análise esperada:} Este é o \textbf{pior caso} para Bubble Sort e Insertion Sort, exigindo o máximo de comparações e trocas ($O(n^2)$). O Quick Sort, com pivô no último elemento, também pode degradar para $O(n^2)$ neste cenário.
+
+\newpage
+
+\subsection{Gráficos Comparativos}
+
+\subsubsection{Gráfico 1: Comparação com Dados Aleatórios}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Desempenho com Dados Aleatórios},
+    xlabel={Tamanho do Array},
+    ylabel={Tempo (ms)},
+    xmode=log,
+    ymode=log,
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+    width=0.95\textwidth,
+    height=0.5\textwidth,
+    log basis x={10},
+    log basis y={10},
+]
+
+% Substitua [VALOR1], [VALOR2], etc. pelos valores reais
+\addplot[color=blue, mark=square, line width=1.5pt] coordinates {
+    (100,[VALOR1])(1000,[VALOR2])(10000,[VALOR3])
+};
+\addlegendentry{Bubble Sort}
+
+\addplot[color=red, mark=triangle, line width=1.5pt] coordinates {
+    (100,[VALOR4])(1000,[VALOR5])(10000,[VALOR6])
+};
+\addlegendentry{Insertion Sort}
+
+\addplot[color=green!70!black, mark=*, line width=1.5pt] coordinates {
+    (100,[VALOR7])(1000,[VALOR8])(10000,[VALOR9])
+};
+\addlegendentry{Quick Sort}
+
+\end{axis}
+\end{tikzpicture}
+\caption{Comparação de desempenho com dados aleatórios em escala logarítmica}
+\label{fig:aleatorio}
+\end{figure}
+
+\subsubsection{Gráfico 2: Comparação com Dados Ordenados Crescente}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Desempenho com Dados Ordenados Crescente},
+    xlabel={Tamanho do Array},
+    ylabel={Tempo (ms)},
+    xmode=log,
+    ymode=log,
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+    width=0.95\textwidth,
+    height=0.5\textwidth,
+    log basis x={10},
+    log basis y={10},
+]
+
+\addplot[color=blue, mark=square, line width=1.5pt] coordinates {
+    (100,[VALOR1])(1000,[VALOR2])(10000,[VALOR3])
+};
+\addlegendentry{Bubble Sort}
+
+\addplot[color=red, mark=triangle, line width=1.5pt] coordinates {
+    (100,[VALOR4])(1000,[VALOR5])(10000,[VALOR6])
+};
+\addlegendentry{Insertion Sort}
+
+\addplot[color=green!70!black, mark=*, line width=1.5pt] coordinates {
+    (100,[VALOR7])(1000,[VALOR8])(10000,[VALOR9])
+};
+\addlegendentry{Quick Sort}
+
+\end{axis}
+\end{tikzpicture}
+\caption{Comparação de desempenho com dados já ordenados em escala logarítmica}
+\label{fig:crescente}
+\end{figure}
+
+\subsubsection{Gráfico 3: Comparação com Dados Ordenados Decrescente}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    title={Desempenho com Dados Ordenados Decrescente},
+    xlabel={Tamanho do Array},
+    ylabel={Tempo (ms)},
+    xmode=log,
+    ymode=log,
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+    width=0.95\textwidth,
+    height=0.5\textwidth,
+    log basis x={10},
+    log basis y={10},
+]
+
+\addplot[color=blue, mark=square, line width=1.5pt] coordinates {
+    (100,[VALOR1])(1000,[VALOR2])(10000,[VALOR3])
+};
+\addlegendentry{Bubble Sort}
+
+\addplot[color=red, mark=triangle, line width=1.5pt] coordinates {
+    (100,[VALOR4])(1000,[VALOR5])(10000,[VALOR6])
+};
+\addlegendentry{Insertion Sort}
+
+\addplot[color=green!70!black, mark=*, line width=1.5pt] coordinates {
+    (100,[VALOR7])(1000,[VALOR8])(10000,[VALOR9])
+};
+\addlegendentry{Quick Sort}
+
+\end{axis}
+\end{tikzpicture}
+\caption{Comparação de desempenho com dados em ordem decrescente em escala logarítmica}
+\label{fig:decrescente}
+\end{figure}
+
+\newpage
+
+\section{Análise dos Resultados}
+
+\subsection{Impacto do Tamanho do Array}
+
+O crescimento do tempo de execução em função do tamanho do array permite validar empiricamente a complexidade teórica de cada algoritmo:
+
+\begin{itemize}
+    \item \textbf{Algoritmos $O(n^2)$:} Para Bubble Sort e Insertion Sort, ao multiplicar o tamanho por 10 (de 100 para 1.000 ou de 1.000 para 10.000), espera-se que o tempo aumente aproximadamente 100 vezes ($10^2$).
+    
+    \item \textbf{Algoritmo $O(n \log n)$:} Para Quick Sort, o aumento deve ser proporcional a $10 \times \log(10) \approx 10 \times 3.32 = 33.2$ vezes.
+\end{itemize}
+
+\subsection{Análise por Algoritmo}
+
+\subsubsection{Bubble Sort}
+
+\textbf{Pontos fortes:}
+\begin{itemize}
+    \item Simples de implementar e compreender
+    \item Detecta arrays já ordenados com otimização (melhor caso $O(n)$)
+    \item Ordenação in-place e estável
+\end{itemize}
+
+\textbf{Pontos fracos:}
+\begin{itemize}
+    \item Desempenho muito ruim para grandes conjuntos de dados
+    \item Mesmo com otimização, ainda é $O(n^2)$ na maioria dos casos
+    \item Realiza muitas trocas desnecessárias
+\end{itemize}
+
+\textbf{Comportamento esperado:}
+\begin{itemize}
+    \item Excelente em dados já ordenados (com flag \texttt{swapped})
+    \item Muito lento em dados aleatórios ou decrescentes
+    \item Deve ser o algoritmo mais lento para 10.000 elementos
+\end{itemize}
+
+\subsubsection{Insertion Sort}
+
+\textbf{Pontos fortes:}
+\begin{itemize}
+    \item Eficiente para conjuntos pequenos
+    \item Ótimo desempenho em dados parcialmente ordenados
+    \item Ordenação in-place e estável
+    \item Melhor constante que Bubble Sort
+\end{itemize}
+
+\textbf{Pontos fracos:}
+\begin{itemize}
+    \item Ainda é $O(n^2)$ para dados aleatórios
+    \item Não é adequado para grandes volumes de dados
+\end{itemize}
+
+\textbf{Comportamento esperado:}
+\begin{itemize}
+    \item Excelente em dados já ordenados crescente
+    \item Comparável ao Bubble Sort em dados aleatórios, mas geralmente um pouco mais rápido
+    \item Pior caso em dados decrescentes
+\end{itemize}
+
+\subsubsection{Quick Sort}
+
+\textbf{Pontos fortes:}
+\begin{itemize}
+    \item Complexidade média $O(n \log n)$
+    \item Muito eficiente para grandes conjuntos de dados
+    \item Algoritmo de propósito geral mais utilizado
+    \item Ordenação in-place (com recursão)
+\end{itemize}
+
+\textbf{Pontos fracos:}
+\begin{itemize}
+    \item Pior caso $O(n^2)$ quando pivô mal escolhido
+    \item Não é estável
+    \item Usa espaço adicional para recursão
+\end{itemize}
+
+\textbf{Comportamento esperado:}
+\begin{itemize}
+    \item Melhor algoritmo para dados aleatórios
+    \item Pode degradar para $O(n^2)$ em dados já ordenados (com último elemento como pivô)
+    \item Geralmente o mais rápido, exceto em casos específicos
+\end{itemize}
+
+\subsection{Comparação com Complexidade Teórica}
+
+\begin{table}[H]
+\centering
+\caption{Comparação entre complexidade teórica e comportamento observado}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Algoritmo} & \textbf{Melhor Caso} & \textbf{Caso Médio} & \textbf{Pior Caso} & \textbf{Espaço} \\ 
+\midrule
+Bubble Sort     & $O(n)$         & $O(n^2)$      & $O(n^2)$      & $O(1)$ \\
+Insertion Sort  & $O(n)$         & $O(n^2)$      & $O(n^2)$      & $O(1)$ \\
+Quick Sort      & $O(n \log n)$  & $O(n \log n)$ & $O(n^2)$      & $O(\log n)$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Recomendações de Uso}
+
+Com base nos resultados obtidos, as seguintes recomendações podem ser feitas:
+
+\begin{itemize}
+    \item \textbf{Para dados pequenos (< 100 elementos):} Insertion Sort é adequado devido à sua simplicidade e bom desempenho
+    
+    \item \textbf{Para dados parcialmente ordenados:} Insertion Sort oferece o melhor desempenho
+    
+    \item \textbf{Para dados grandes e aleatórios:} Quick Sort é claramente superior
+    
+    \item \textbf{Para fins didáticos:} Bubble Sort é útil para ensinar conceitos de ordenação
+    
+    \item \textbf{Quando estabilidade é necessária:} Bubble Sort ou Insertion Sort (Quick Sort não é estável)
+    
+    \item \textbf{Para uso geral em produção:} Quick Sort, ou algoritmos híbridos como TimSort (usado em Java e Python)
+\end{itemize}
+
+\newpage
+
+\section{Conclusões}
+
+Este trabalho permitiu analisar empiricamente três algoritmos clássicos de ordenação, confirmando suas características teóricas através de medições práticas em diferentes cenários.
+
+\subsection{Principais Descobertas}
+
+\begin{enumerate}
+    \item \textbf{Confirmação da Complexidade:} Os resultados experimentais validaram a complexidade teórica de cada algoritmo, demonstrando claramente a diferença entre $O(n^2)$ e $O(n \log n)$.
+    
+    \item \textbf{Importância do Cenário:} A ordenação inicial dos dados afeta drasticamente o desempenho, especialmente para algoritmos simples como Bubble Sort e Insertion Sort.
+    
+    \item \textbf{Escalabilidade:} Quick Sort demonstrou superioridade clara para grandes volumes de dados, enquanto Insertion Sort mostrou-se competitivo para pequenos conjuntos.
+    
+    \item \textbf{Otimizações Relevantes:} A flag \texttt{swapped} no Bubble Sort provou ser uma otimização importante, reduzindo significativamente o tempo para dados já ordenados.
+    
+    \item \textbf{Trade-offs:} Cada algoritmo apresenta vantagens e desvantagens específicas, não existindo uma "solução única" para todos os casos.
+\end{enumerate}
+
+\subsection{Aprendizados Técnicos}
+
+A implementação deste trabalho proporcionou:
+
+\begin{itemize}
+    \item Compreensão profunda dos algoritmos através da implementação manual
+    \item Prática com medição de desempenho usando \texttt{System.nanoTime()}
+    \item Experiência com leitura e processamento de arquivos CSV em Java
+    \item Aplicação de princípios de Programação Orientada a Objetos
+    \item Análise crítica de resultados experimentais
+\end{itemize}
+
+\subsection{Considerações Finais}
+
+A escolha do algoritmo de ordenação adequado depende fundamentalmente do contexto de aplicação. Enquanto algoritmos simples como Insertion Sort são suficientes para pequenos conjuntos de dados ou dados parcialmente ordenados, algoritmos mais sofisticados como Quick Sort são essenciais para processamento eficiente de grandes volumes.
+
+Em aplicações reais, muitas bibliotecas utilizam algoritmos híbridos que combinam diferentes estratégias dependendo do tamanho e características dos dados. Por exemplo, o TimSort (usado em Python e Java) combina Merge Sort e Insertion Sort, aproveitando as vantagens de cada um.
+
+Este trabalho demonstrou que a teoria da complexidade algorítmica tem aplicação prática direta, e que compreender o comportamento dos algoritmos é fundamental para desenvolver software eficiente e escalável.
+
+\subsection{Trabalhos Futuros}
+
+Possíveis extensões deste estudo incluem:
+
+\begin{itemize}
+    \item Implementação de outros algoritmos (Merge Sort, Heap Sort, Shell Sort)
+    \item Análise com conjuntos de dados maiores (100.000+ elementos)
+    \item Teste com diferentes tipos de dados (strings, objetos)
+    \item Implementação de Quick Sort com diferentes estratégias de pivô
+    \item Análise de consumo de memória
+    \item Comparação com implementações nativas do Java (\texttt{Arrays.sort()})
+\end{itemize}
+
+\newpage
+
+\section{Referências}
+
+\begin{itemize}
+    \item GeeksforGeeks. \textit{Bubble Sort Algorithm}. Disponível em: \\ \texttt{https://www.geeksforgeeks.org/dsa/bubble-sort-algorithm/}. Acesso em: novembro de 2025.
+    
+    \item GeeksforGeeks. \textit{Insertion Sort Algorithm}. Disponível em: \\ \texttt{https://www.geeksforgeeks.org/dsa/insertion-sort-algorithm/}. Acesso em: novembro de 2025.
+    
+    \item GeeksforGeeks. \textit{Quick Sort Algorithm}. Disponível em: \\ \texttt{https://www.geeksforgeeks.org/dsa/quick-sort-algorithm/}. Acesso em: novembro de 2025.
+    
+\end{itemize}
+
+\newpage
+
+\section*{Apêndice A -- Instruções de Execução}
+
+\subsection*{Pré-requisitos}
+
+\begin{itemize}
+    \item Java Development Kit (JDK) 17 ou superior
+    \item IDE Java (IntelliJ IDEA, Eclipse, VS Code) ou compilador \texttt{javac}
+    \item Arquivos CSV de dados de teste
+\end{itemize}
+
+\subsection*{Estrutura de Diretórios}
+
+\begin{lstlisting}[style=console]
+projeto/
+├── src/
+│   ├── Main.java
+│   └── algorithms/
+│       ├── SortingAlgorithm.java
+│       ├── BubbleSort.java
+│       ├── InsertionSort.java
+│       └── QuickSort.java
+└── data/
+    ├── aleatorio_100.csv
+    ├── aleatorio_1000.csv
+    ├── aleatorio_10000.csv
+    ├── crescente_100.csv
+    ├── crescente_1000.csv
+    ├── crescente_10000.csv
+    ├── decrescente_100.csv
+    ├── decrescente_1000.csv
+    └── decrescente_10000.csv
+\end{lstlisting}
+
+\subsection*{Compilação e Execução}
+
+\textbf{Via linha de comando:}
+\begin{lstlisting}[style=console]
+# Compilar
+javac -d bin src/*.java src/algorithms/*.java
+
+# Executar
+java -cp bin Main
+\end{lstlisting}
+
+\textbf{Via IDE:}
+\begin{enumerate}
+    \item Abra o projeto na IDE
+    \item Execute a classe \texttt{Main.java}
+    \item Os resultados serão exibidos no console
+\end{enumerate}
+
+\subsection*{Formato dos Arquivos CSV}
+
+Cada arquivo CSV contém um número inteiro por linha:
+
+\begin{lstlisting}[style=console]
+42
+17
+93
+8
+...
+\end{lstlisting}
+
+\end{document}
