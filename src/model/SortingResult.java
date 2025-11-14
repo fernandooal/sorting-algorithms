@@ -14,7 +14,6 @@ public class SortingResult {
         this.executionTimeNanos = executionTimeNanos;
     }
 
-    // getters
     public String getAlgorithmName() {
         return algorithmName;
     }
@@ -31,24 +30,20 @@ public class SortingResult {
         return executionTimeNanos;
     }
 
-    // converte o tempo de execução de nanosegundos para milissegundos
     public double getExecutionTimeMillis() {
         return executionTimeNanos / 1_000_000.0;
     }
 
-    // converte o tempo de execução de nanosegundos para segundos
     public double getExecutionTimeSeconds() {
         return executionTimeNanos / 1_000_000_000.0;
     }
 
-    // retorna uma representação em string do resultado
     @Override
     public String toString() {
         return String.format("%s | %s | %d elementos | %.4f ms",
                 algorithmName, dataType, dataSize, getExecutionTimeMillis());
     }
 
-    // retorna uma representação detalhada do resultado
     public String toDetailedString() {
         return String.format(
                 "Algoritmo: %s\n" +

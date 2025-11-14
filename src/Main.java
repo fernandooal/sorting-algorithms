@@ -8,28 +8,19 @@ import java.util.List;
 
 public class Main {
 
-    // Configuração dos arquivos CSV
+    // configuração dos arquivos CSV, tipos e tamanhos de dados
     private static final String DATA_PATH = "data/";
     private static final String REPORT_PATH = "report/";
-
-    // Tipos de dados
     private static final String[] DATA_TYPES = {"aleatorio", "crescente", "decrescente"};
     private static final String[] DATA_TYPE_LABELS = {"Aleatório", "Crescente", "Decrescente"};
-
-    // Tamanhos dos conjuntos de dados
     private static final int[] DATA_SIZES = {100, 1000, 10000};
 
     public static void main(String[] args) {
-        // Cabeçalho do programa
         printHeader();
-
-        // Inicializa os algoritmos
         List<SortingAlgorithm> algorithms = initializeAlgorithms();
-
-        // Lista para armazenar todos os resultados
         List<SortingResult> allResults = new ArrayList<>();
 
-        // Contadores de progresso
+        // contadores de progresso
         int totalTests = DATA_TYPES.length * DATA_SIZES.length * algorithms.size();
         int currentTest = 0;
         int successCount = 0;
@@ -37,7 +28,7 @@ public class Main {
 
         System.out.println("Iniciando testes...\n");
 
-        // Executa os testes para cada combinação de tipo e tamanho
+        // execução dos testes para cada combinação de tipo e tamanho
         for (int i = 0; i < DATA_TYPES.length; i++) {
             String dataType = DATA_TYPES[i];
             String dataTypeLabel = DATA_TYPE_LABELS[i];
@@ -54,7 +45,6 @@ public class Main {
                 System.out.println("Arquivo: " + fileName);
                 System.out.println("-".repeat(80));
 
-                // Verifica se o arquivo existe
                 if (!CSVReader.fileExists(fileName)) {
                     System.err.println("ERRO: Arquivo não encontrado: " + fileName);
                     System.err.println("Certifique-se de que a pasta 'data' existe e contém os arquivos CSV");
@@ -63,7 +53,6 @@ public class Main {
                     continue;
                 }
 
-                // Lê os dados do arquivo
                 int[] data = CSVReader.readCSV(fileName);
 
                 if (data.length == 0) {
@@ -75,24 +64,22 @@ public class Main {
 
                 System.out.println("Dados carregados: " + data.length + " elementos\n");
 
-                // Testa cada algoritmo com esses dados
+                // teste de cada algoritmo
                 for (SortingAlgorithm algorithm : algorithms) {
                     currentTest++;
 
-                    // Exibe progresso
+                    // exibir progresso
                     System.out.printf("[%d/%d] Testando %s...",
                             currentTest, totalTests, algorithm.getName());
 
                     try {
-                        // Mede o tempo de execução com validação
                         SortingResult result = PerformanceMeasurer.measureExecutionTime(
                                 algorithm, data, dataTypeLabel, size, true
                         );
 
-                        // Adiciona o resultado à lista
                         allResults.add(result);
 
-                        // Exibe resultado
+                        // exibir resultado
                         System.out.printf(" ✓ %.6f ms\n", result.getExecutionTimeMillis());
                         successCount++;
 
@@ -106,40 +93,34 @@ public class Main {
             System.out.println();
         }
 
-        // Exibe resumo da execução
+        // exibir resumo da execução
         printExecutionSummary(totalTests, successCount, failCount);
 
-        // Se não houver resultados, encerra
         if (allResults.isEmpty()) {
             System.err.println("\nNENHUM RESULTADO COLETADO. Verifique os erros acima.");
             return;
         }
 
-        // Gera e exibe o relatório completo
+        // gerar e exibir o relatório
         System.out.println("\n" + "=".repeat(80));
         System.out.println("GERANDO RELATÓRIO FINAL");
         System.out.println("=".repeat(80));
         System.out.println();
-
         ReportGenerator.printFullReport(allResults);
 
-        // Gera CSV para gráficos
         System.out.println("\n" + "=".repeat(80));
         System.out.println("DADOS EM FORMATO CSV (para importar em planilhas)");
         System.out.println("=".repeat(80));
-
         String csvOutput = ReportGenerator.generateCSVOutput(allResults);
         System.out.println(csvOutput);
 
-        // Salva CSV em arquivo
         System.out.println("\n" + "=".repeat(80));
         System.out.println("SALVANDO RESULTADOS EM ARQUIVO");
         System.out.println("=".repeat(80));
-
         String csvFileName = REPORT_PATH + "resultados.csv";
         util.ReportExporter.saveCSV(csvFileName, csvOutput);
 
-        // Salva relatório completo em arquivo texto
+        // salvar relatório
         String reportFileName = REPORT_PATH + "relatorio.txt";
         String fullReport = ReportGenerator.generateTextReport(allResults) + "\n" +
                 ReportGenerator.generateTable(allResults) + "\n" +
@@ -148,14 +129,12 @@ public class Main {
                 ReportGenerator.generateAnalysis(allResults);
         util.ReportExporter.saveReport(reportFileName, fullReport);
 
-        // Mensagem final
         printFooter();
     }
 
     private static List<SortingAlgorithm> initializeAlgorithms() {
         List<SortingAlgorithm> algorithms = new ArrayList<>();
 
-        // Adiciona os três algoritmos
         algorithms.add(new BubbleSort());
         algorithms.add(new InsertionSort());
         algorithms.add(new QuickSort());

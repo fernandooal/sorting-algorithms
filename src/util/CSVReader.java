@@ -21,11 +21,9 @@ public class CSVReader {
                 // ignorar linhas vazias
                 if (!line.isEmpty()) {
                     try {
-                        // converter a linha para número inteiro
                         int number = Integer.parseInt(line);
                         numbers.add(number);
                     } catch (NumberFormatException e) {
-                        // ignorar linhas que não são números válidos
                         System.err.println("Aviso: linha ignorada (não é um número válido): " + line);
                     }
                 }
@@ -41,7 +39,8 @@ public class CSVReader {
         }
 
         // converter List<Integer> para int[]
-        return numbers.stream().mapToInt(Integer::intValue).toArray();
+        int[] result = numbers.stream().mapToInt(Integer::intValue).toArray();
+        return result;
     }
 
     public static boolean fileExists(String filePath) {
