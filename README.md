@@ -35,6 +35,27 @@ sorting-algorithms/
 
 ---
 
+## 🏗️ Arquitetura e Padrões de Projeto
+
+### Strategy Pattern (Padrão Estratégia)
+
+O projeto utiliza o padrão Strategy para implementar os algoritmos de ordenação. A interface `SortingAlgorithm` define um contrato que todos os algoritmos devem seguir:
+
+```java
+public interface SortingAlgorithm {
+    void sort(int[] data);
+    String getName();
+}
+```
+
+**Vantagens dessa abordagem:**
+- **Extensibilidade**: Adicionar um novo algoritmo requer apenas criar uma nova classe que implemente a interface
+- **Testabilidade**: Cada algoritmo pode ser testado isoladamente
+- **Manutenibilidade**: Modificações em um algoritmo não afetam os demais
+- **Intercambialidade**: O sistema pode trocar algoritmos em tempo de execução sem alterar o código cliente
+
+---
+
 ## 👥 Divisão de Tarefas
 
 ### Fernando Alonso Piroga da Silva
@@ -46,21 +67,21 @@ sorting-algorithms/
 
 * Responsável pelas implementações de:
 
-  * **BubbleSort.java**
-  * **InsertionSort.java**
-  * Suporte adicional na geração de relatório, testes e revisão geral do projeto
+    * **BubbleSort.java**
+    * **InsertionSort.java**
+    * Suporte adicional na geração de relatório, testes e revisão geral do projeto
 
 ### Renato Pestana de Gouveia
 
 * Responsável pelas seguintes partes do projeto:
 
-  * Implementação da interface de algoritmos de ordenação (**SortingAlgorithm.java**)
-  * Implementação da classe de modelo (**SortingResult.java**)
-  * Leitura dos arquivos CSV (**CSVReader.java**)
-  * Medidas de desempenho (**PerformanceMeasurer.java**)
-  * Impressão e exportação de resultados (**ReportExporter.java**)
-  * Geração do relatório final em texto (**ReportGenerator.java**)
-  * Integração geral no **Main.java**
+    * Implementação da interface de algoritmos de ordenação (**SortingAlgorithm.java**)
+    * Implementação da classe de modelo (**SortingResult.java**)
+    * Leitura dos arquivos CSV (**CSVReader.java**)
+    * Medidas de desempenho (**PerformanceMeasurer.java**)
+    * Impressão e exportação de resultados (**ReportExporter.java**)
+    * Geração do relatório final em texto (**ReportGenerator.java**)
+    * Integração geral no **Main.java**
 
 ---
 
@@ -88,9 +109,9 @@ java -cp bin Main
 
 É um algoritmo simples de ordenação que funciona repetidamente percorrendo o array, comparando pares de elementos adjacentes e trocando-os caso estejam na ordem errada.
 
-#### Por que “Bubble”?
+#### Por que "Bubble"?
 
-> Porque os maiores valores vão “subindo” para o final do array, assim como bolhas sobem na água.
+> Porque os maiores valores vão "subindo" para o final do array, assim como bolhas sobem na água.
 
 #### Complexidade:
 
@@ -141,8 +162,8 @@ A classe `QuickSort` implementa a interface `SortingAlgorithm` e possui:
 - Método `sort(int[] array)` que invoca a ordenação com recursão
 - Método `quickSort(...)` com limites `low` e `high`
 - Método `partition(...)` que:
-  - Escolhe o último elemento como pivô
-  - Move menores à esquerda e maiores à direita
+    - Escolhe o último elemento como pivô
+    - Move menores à esquerda e maiores à direita
 
 #### Complexidade:
 
@@ -157,4 +178,3 @@ A classe `QuickSort` implementa a interface `SortingAlgorithm` e possui:
 ## 📄 Licença
 
 Projeto acadêmico desenvolvido para a disciplina **Resolução de Problemas Estruturados em Computação** - PUCPR.
-
